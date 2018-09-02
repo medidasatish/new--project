@@ -1,0 +1,30 @@
+peline {
+    agent any
+           
+      stages {
+        stage {'compile stage'} {
+            
+          steps {
+             withMaven(maven : '/opt/maven') {
+                 sh 'mvn clean compile'
+             }
+          }
+       }
+      stage {'Testing stage'} {
+
+       steps {
+            withMaven(maven : '/opt/maven') {
+               sh 'mvn test'
+             }
+          }
+       }
+      stage {'Deployment stage'} {
+        
+       steps {
+          withMaven(maven : '/opt/maven') {
+              sh 'mvn deploy'
+             }
+           }
+       }
+     }
+   } 
